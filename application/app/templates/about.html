@@ -1,0 +1,34 @@
+
+{% extends "base.html" %}
+{% block page_content %}
+<div class="jumbotron">    
+    <h1>About Twender</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 about-col">
+                <h2>what is twender?</h2>
+                <p>
+                twender is a small interactive web application that uses machine
+                learning techniques to classify twitter users based on the text of
+                their tweets. 
+                </p>
+            </div>
+            <div class="col-md-4 about-col">
+                <h2>why?</h2>
+                <p>
+                twender was built as a senior project with the goal of learning more
+                about the wonders of machine learning and natural language proocessing.
+                </p>
+            </div>
+            <div class="col-md-4 about-col">
+                <h2>well, how good is it?</h2>
+                <p>
+                twender uses tweets that have been labeled based on the first name
+                of the user to simplify the process of collecting training data. that is to 
+                say the labels are not always correct. currently twender has 63% accuracy.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends "bootstrap/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}Twender{% endblock %}
+
+{% block head %}
+{{ super() }}
+<link href="{{ url_for('static', filename='main_style.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block navbar %}
+<div class="container">
+<div class="navbar" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{{ url_for('index') }}">Twender</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav nav-pills pull-right">
+                <li><a href="{{ url_for('index') }}">Home</a></li>
+                <li><a href="{{ url_for('about') }}">About</a></li>
+            </ul>
+            <!--<ul class="nav navbar-nav navbar-right">
+                <li>
+                    <form class="navbar-form" action="{{ url_for('search') }}" method="post" role="form">
+                        {{ g.search_form.hidden_tag() }}
+                        {{ g.search_form.search(class="form-control") }}
+                    </form>
+                </li>
+            </ul>-->
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    {% for message in get_flashed_messages() %}
+    <div class="alert alert-warning">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {{ message }}
+    </div>
+    {% endfor %}
+
+    {% block page_content %}{% endblock %}
+</div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script src="//d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<script src="{{ url_for('static', filename='twenderpie.js')  }}"></script>
+{% endblock %}

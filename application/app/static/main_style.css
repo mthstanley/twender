@@ -1,0 +1,52 @@
+
+.jumbotron h1 {
+    margin-bottom: 50px;
+}
+
+.jumbotron {
+    text-align: center;
+}
+
+div.about-col p {
+    text-align: justify;
+}
+
+.tweet {
+    background-color: #eee;
+    border-radius: 6px;
+    margin: auto 20px auto 20px;
+    padding: 10px;
+}
+
+.row.tweets {
+    width: 50%;
+}
+
+.tweets {
+    margin: 20px auto 20px auto;
+}
+
+.girl {
+    background-color: #ffb6c1;
+}
+
+.boy {
+    background-color: #89cff0;
+}
+
+.pie-container {
+    text-align: center;
+}
+
+.tweet-container {
+    text-align: center;
+}
+
+.arc text {
+    font: 14px sans-serif;
+    text-anchor: middle;
+}
+
+.arc path {
+    stroke: #fff;
+}
