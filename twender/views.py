@@ -6,11 +6,11 @@ web application
 """
 
 from flask import render_template, flash, redirect, g, url_for
-from app import app
+from . import app
 from .forms import SearchForm
-from .models import tweet_classifier
-from twender.analysis.learnyouaclassifier import genderize
-from twender import tweepy_api, twender_db
+#from .models import tweet_classifier
+#from twender.analysis.learnyouaclassifier import genderize
+#from twender import tweepy_api, twender_db
 import tweepy
 import json
 import re
@@ -47,19 +47,20 @@ def search():
 #been classified
 @app.route('/classify/<query>')
 def classify(query):
-    error = None
-    try:
-        tweets = tweepy_api.user_timeline(id=query, count=200)
-        json_tweets = [tweet._json for tweet in tweets]
-        classifications = tweet_classifier.classify(json_tweets)
-       
+    #error = None
+    #try:
+        #tweets = tweepy_api.user_timeline(id=query, count=200)
+        #json_tweets = [tweet._json for tweet in tweets]
+        #classifications = tweet_classifier.classify(json_tweets)
+
         # unzip the zipped tweets and labels
-        texts, labels = zip(*classifications)
-        gender = genderize(labels)
-        classifications = zip(texts, labels)
-        return render_template('index.html', tweets=classifications, 
-                gender=gender)
-    except Exception as e:
-        print(e)
-        error = "Oops! I counld't find you."
-        return render_template('index.html', error=error)
+        #texts, labels = zip(*classifications)
+        #gender = genderize(labels)
+        #classifications = zip(texts, labels)
+        #return render_template('index.html', tweets=classifications,
+        #        gender=gender)
+    #except Exception as e:
+        #print(e)
+        #error = "Oops! I counld't find you."
+        #return render_template('index.html', error=error)
+        return render_template('index.html')
