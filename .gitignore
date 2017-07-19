@@ -1,4 +1,4 @@
-twitter_config.py
+.env
 
 *.pyc
 __pycache__

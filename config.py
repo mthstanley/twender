@@ -10,13 +10,18 @@ includes:
 """
 
 import os
+from os.path import join, dirname
 import json
 
 import pymongo
 import tweepy
-
+from dotenv import load_dotenv
 
 BASEDIR = os.path.abspath(os.path.dirname(__file__))
+
+# load dotenv configuration values into environment variables
+dotenv_path = join(dirname(__file__), '.env')
+load_dotenv(dotenv_path)
 
 
 class Config:
@@ -27,9 +32,9 @@ class Config:
     TWITTER_CONSUMER_SECRET = os.environ.get('TWITTER_CONSUMER_SECRET')
     TWITTER_ACCESS_TOKEN = os.environ.get('TWITTER_ACCESS_TOKEN')
     TWITTER_ACCESS_TOKEN_SECRET = os.environ.get('TWITTER_ACCESS_TOKEN_SECRET')
-    twitter_auth = tweepy.OAuthHandler(TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET)
-    twitter_auth.set_access_token(TWITTER_ACCESS_TOKEN, TWITTER_ACCESS_TOKEN_SECRET)
-    tweepy_api = tweepy.API(twitter_auth)
+    TWITTER_AUTH = tweepy.OAuthHandler(TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET)
+    TWITTER_AUTH.set_access_token(TWITTER_ACCESS_TOKEN, TWITTER_ACCESS_TOKEN_SECRET)
+    TWEEPY_API = tweepy.API(TWITTER_AUTH)
 
     @staticmethod
     def init_app(app):

@@ -1,10 +1,7 @@
-
 from flask import Flask
 from flask_bootstrap import Bootstrap
 from werkzeug.utils import find_modules, import_string
 from config import config
-
-bootstrap = Bootstrap()
 
 
 def register_ext(app):
@@ -17,6 +14,7 @@ def register_ext(app):
         register all flask extension on the given flask application
         object
     """
+    bootstrap = Bootstrap()
     bootstrap.init_app(app)
 
 
@@ -63,7 +61,6 @@ def create_app(config_name):
     app = Flask(__name__)
     app.config.from_object(config[config_name])
     config[config_name].init_app(app)
-
 
     register_ext(app)
     register_cli(app)
