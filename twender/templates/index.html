@@ -10,7 +10,7 @@
         <div class="col-md-4">
         </div> 
         <div class="col-md-4"> 
-            <form class="form" action="{{ url_for('search') }}" method="post" role="form">
+            <form class="form" action="{{ url_for('main.search') }}" method="post" role="form">
                 {{ g.search_form.hidden_tag() }}
                 {{ g.search_form.search(class="form-control") }}
             </form>

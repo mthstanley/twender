@@ -19,16 +19,16 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{{ url_for('index') }}">Twender</a>
+            <a class="navbar-brand" href="{{ url_for('main.index') }}">Twender</a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav nav-pills pull-right">
-                <li><a href="{{ url_for('index') }}">Home</a></li>
-                <li><a href="{{ url_for('about') }}">About</a></li>
+                <li><a href="{{ url_for('main.index') }}">Home</a></li>
+                <li><a href="{{ url_for('main.about') }}">About</a></li>
             </ul>
             <!--<ul class="nav navbar-nav navbar-right">
                 <li>
-                    <form class="navbar-form" action="{{ url_for('search') }}" method="post" role="form">
+                    <form class="navbar-form" action="{{ url_for('main.search') }}" method="post" role="form">
                         {{ g.search_form.hidden_tag() }}
                         {{ g.search_form.search(class="form-control") }}
                     </form>

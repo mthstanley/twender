@@ -6,7 +6,7 @@ web application
 """
 
 from flask import render_template, flash, redirect, g, url_for
-from . import app
+from . import bp
 from .forms import SearchForm
 #from .models import tweet_classifier
 #from twender.analysis.learnyouaclassifier import genderize
@@ -16,36 +16,36 @@ import json
 import re
 
 
-@app.before_request
+@bp.before_request
 def before_request():
     g.search_form = SearchForm()
 
 
 #index page route
-@app.route('/')
-@app.route('/index')
+@bp.route('/')
+@bp.route('/index')
 def index():
     return render_template('index.html', tweets=[], gender=-1)
 
 
 #about page route
-@app.route('/about')
+@bp.route('/about')
 def about():
     return render_template('about.html')
 
 
 #search route, used when the user enters a search
 #this route redirects to the classify route
-@app.route('/search', methods=['POST'])
+@bp.route('/search', methods=['POST'])
 def search():
     if not g.search_form.validate_on_submit():
-        return redirect(url_for('index'))
-    return redirect(url_for('classify', query=g.search_form.search.data))
+        return redirect(url_for('main.index'))
+    return redirect(url_for('main.classify', query=g.search_form.search.data))
 
 
 #classification route, displayed when the user has
 #been classified
-@app.route('/classify/<query>')
+@bp.route('/classify/<query>')
 def classify(query):
     #error = None
     #try:
