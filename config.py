@@ -9,29 +9,55 @@ includes:
     mongodb client, twender_db and tweets collection
 """
 
-import tweepy
-import json
-import pymongo
 import os
-import twitter_config
+import json
 
-consumer_key = twitter_config.CONSUMER_KEY
-consumer_secret = twitter_config.CONSUMER_SECRET 
-
-access_token = twitter_config.ACCESS_TOKEN 
-access_token_secret = twitter_config.ACCESS_TOKEN_SECRET
-
-twitter_auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-twitter_auth.set_access_token(access_token, access_token_secret)
-
-tweepy_api = tweepy.API(twitter_auth)
+import pymongo
+import tweepy
 
 
-with open('names/valid_names.json', 'r') as data_file:
-    valid_names = json.load(data_file)
+BASEDIR = os.path.abspath(os.path.dirname(__file__))
 
 
-mongo_client = pymongo.MongoClient()
-twender_db = mongo_client.twender_database
-tweets = twender_db.tweets
+class Config:
+    SECRET_KEY = os.environ.get('SECRET_KEY') or 'hard to guess string'
 
+    # Twitter configuration values
+    TWITTER_CONSUMER_KEY = os.environ.get('TWITTER_CONSUMER_KEY')
+    TWITTER_CONSUMER_SECRET = os.environ.get('TWITTER_CONSUMER_SECRET')
+    TWITTER_ACCESS_TOKEN = os.environ.get('TWITTER_ACCESS_TOKEN')
+    TWITTER_ACCESS_TOKEN_SECRET = os.environ.get('TWITTER_ACCESS_TOKEN_SECRET')
+    twitter_auth = tweepy.OAuthHandler(TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET)
+    twitter_auth.set_access_token(TWITTER_ACCESS_TOKEN, TWITTER_ACCESS_TOKEN_SECRET)
+    tweepy_api = tweepy.API(twitter_auth)
+
+    @staticmethod
+    def init_app(app):
+        pass
+
+
+class DevelopmentConfig(Config):
+    DEBUG = True
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DEV_DATABASE_URL') or \
+        'sqlite:///' + os.path.join(BASEDIR, 'data-dev.sqlite')
+
+
+class TestingConfig(Config):
+    TESTING = True
+    WTF_CSRF_ENABLED = False
+    SQLALCHEMY_DATABASE_URI = os.environ.get('TEST_DATABASE_URL') or \
+        'sqlite:///' + os.path.join(BASEDIR, 'data-test.sqlite')
+
+
+class ProductionConfig(Config):
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
+        'sqlite:///' + os.path.join(BASEDIR, 'data.sqlite')
+
+
+config = {
+    'development': DevelopmentConfig,
+    'testing': TestingConfig,
+    'production': ProductionConfig,
+
+    'default': DevelopmentConfig
+}
