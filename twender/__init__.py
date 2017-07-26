@@ -1,8 +1,14 @@
 from flask import Flask
 from flask_bootstrap import Bootstrap
+from flask_pymongo import PyMongo
 from werkzeug.utils import find_modules, import_string
 from config import config
+import tweepy
 
+from utils.analysis.learnyouaclassifier import TwenderClassifier
+
+bootstrap = Bootstrap()
+mongo = PyMongo()
 
 def register_ext(app):
     """
@@ -14,8 +20,8 @@ def register_ext(app):
         register all flask extension on the given flask application
         object
     """
-    bootstrap = Bootstrap()
     bootstrap.init_app(app)
+    mongo.init_app(app)
 
 
 def register_cli(app):
@@ -65,5 +71,18 @@ def create_app(config_name):
     register_ext(app)
     register_cli(app)
     register_blueprints(app)
+
+    # initialize tweepy api
+    twitter_auth = tweepy.OAuthHandler(app.config['TWITTER_CONSUMER_KEY'],
+            app.config['TWITTER_CONSUMER_SECRET'])
+    twitter_auth.set_access_token(app.config['TWITTER_ACCESS_TOKEN'],
+            app.config['TWITTER_ACCESS_TOKEN_SECRET'])
+    app.tweepy_api = tweepy.API(twitter_auth)
+
+    # initialize classifier
+    app.classifier = TwenderClassifier()
+    with app.app_context():
+        app.classifier.train(mongo.db.tweets.find())
+
 
     return app

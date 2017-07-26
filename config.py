@@ -32,9 +32,14 @@ class Config:
     TWITTER_CONSUMER_SECRET = os.environ.get('TWITTER_CONSUMER_SECRET')
     TWITTER_ACCESS_TOKEN = os.environ.get('TWITTER_ACCESS_TOKEN')
     TWITTER_ACCESS_TOKEN_SECRET = os.environ.get('TWITTER_ACCESS_TOKEN_SECRET')
-    TWITTER_AUTH = tweepy.OAuthHandler(TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET)
-    TWITTER_AUTH.set_access_token(TWITTER_ACCESS_TOKEN, TWITTER_ACCESS_TOKEN_SECRET)
-    TWEEPY_API = tweepy.API(TWITTER_AUTH)
+
+    # Mongodb configuration
+    MONGO_HOST = os.environ.get('MONGO_HOST')
+    MONGO_PORT = os.environ.get('MONGO_PORT')
+    MONGO_USERNAME = os.environ.get('MONGO_USERNAME')
+    MONGO_PASSWORD = os.environ.get('MONGO_PASSWORD')
+    MONGO_AUTH_SOURCE = os.environ.get('MONGO_AUTH_SOURCE')
+
 
     @staticmethod
     def init_app(app):

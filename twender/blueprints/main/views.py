@@ -5,15 +5,15 @@ contains the view routing functionality for the twender
 web application
 """
 
-from flask import render_template, flash, redirect, g, url_for
-from . import bp
-from .forms import SearchForm
-#from .models import tweet_classifier
-#from twender.analysis.learnyouaclassifier import genderize
-#from twender import tweepy_api, twender_db
 import tweepy
 import json
 import re
+from flask import current_app, render_template, flash, redirect, g, url_for
+
+from . import bp
+from .forms import SearchForm
+
+from utils.analysis.learnyouaclassifier import genderize
 
 
 @bp.before_request
@@ -47,20 +47,17 @@ def search():
 #been classified
 @bp.route('/classify/<query>')
 def classify(query):
-    #error = None
-    #try:
-        #tweets = tweepy_api.user_timeline(id=query, count=200)
-        #json_tweets = [tweet._json for tweet in tweets]
-        #classifications = tweet_classifier.classify(json_tweets)
-
+    error = None
+    try:
+        tweets = current_app.tweepy_api.user_timeline(id=query, count=200)
+        json_tweets = [tweet._json for tweet in tweets]
+        classifications = current_app.classifier.classify(json_tweets)
         # unzip the zipped tweets and labels
-        #texts, labels = zip(*classifications)
-        #gender = genderize(labels)
-        #classifications = zip(texts, labels)
-        #return render_template('index.html', tweets=classifications,
-        #        gender=gender)
-    #except Exception as e:
-        #print(e)
-        #error = "Oops! I counld't find you."
-        #return render_template('index.html', error=error)
-        return render_template('index.html')
+        texts, labels = zip(*classifications)
+        gender = genderize(labels)
+        classifications = zip(texts, labels)
+        return render_template('index.html', tweets=classifications, gender=gender)
+    except Exception as e:
+        print(e)
+        error = "Oops! I counld't find you."
+        return render_template('index.html', error=error)
