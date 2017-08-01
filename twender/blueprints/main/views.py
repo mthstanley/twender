@@ -13,7 +13,7 @@ from flask import current_app, render_template, flash, redirect, g, url_for
 from . import bp
 from .forms import SearchForm
 
-from utils.analysis.learnyouaclassifier import genderize
+from utils.learnyouaclassifier import genderize
 
 
 @bp.before_request
