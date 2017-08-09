@@ -1,48 +1,23 @@
 {% extends "base.html" %}
 {% block page_content %}
-<div class="jumbotron">    
+<div class="row jumbotron">    
     <h1>Welcome to Twender!</h1>
     <div class="row">
         <p class="lead">Don't be shy, enter your twitter handle.</p>
     </div>
-    <div class="container-fluid">
     <div class="row search">
-        <div class="col-md-4">
-        </div> 
-        <div class="col-md-4"> 
-            <form class="form" action="{{ url_for('main.search') }}" method="post" role="form">
-                {{ g.search_form.hidden_tag() }}
-                {{ g.search_form.search(class="form-control") }}
+        <div class="col-md-6 col-md-offset-3"> 
+            <form class="form" action="/" method="post" role="form">
+                {{ form.hidden_tag() }}
+                {{ form.username(class="form-control") }}
+                {% if form.username.errors %}
+                    <div class="alert alert-warning">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        {{ form.username.errors | join(',') }}
+                    </div>
+                {% endif %}
             </form>
         </div>
-        <div class="col-md-4">
-            {% if error %}
-            <div class="alert alert-warning">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                {{ error }}
-            </div>
-            {% endif %}
-        </div>
     </div>
-    <div class="row">
-        {% if gender == 0 %}
-            <p>I'm gunna guess... you're a guy?</p>
-        {% elif gender == 1 %}
-            <p>Hmmm... are you a girl?</p>
-        {% endif %}
-    </div>
-    </div>
-<div class="row">
-    <div class="pie-container"></div>
-</div>
-</div>
-<div class="tweet-container">
-{% for tweet,label in tweets %}
-    <div class="row tweets">
-        <div class="tweet {% if label == 0 %}boy{% else %}girl{% endif %}"> 
-            <p>{{ tweet['text'] }}</p>
-        </div>
-    </div>
-{% endfor %}
 </div>
 {% endblock %}

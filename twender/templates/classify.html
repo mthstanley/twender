@@ -1,4 +1,53 @@
 {% extends "base.html" %}
 {% block page_content %}
-	<h1>{{ query }}</h1>
+<div class="container-fluid">
+    <div class="row">
+        <!--
+        <div class="col-sm-3 col-md-2 sidebar">
+        </div>
+        --!>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <h1 class="page-header">User Classification: {% if gender == 0 %}Male{% elif gender == 1 %}Female{% endif %}</h1>
+            <div class="row">
+                <div class="col-md-6 user">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <img class="img-responsive img-thumbnail" src="{{ user.profile_image_url | twitterthumb('original') }}" />
+                        </div>
+                        <div class="col-md-6">
+                            <h2 class="sub-header">{{ user.name }}</h2>
+                            <p><a href="https://twitter.com/{{ user.screen_name }}">@{{ user.screen_name }}</a></p>
+                            <p>{{ user.description }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 pie-container">
+                </div>
+            </div>
+            <h2 class="sub-header">Tweets</h2>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Text</th>
+                            <th>Created At</th>
+                            <th>Classification</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for tweet,label in tweets %}
+                        <tr class="tweet {% if label == 0 %}boy{% else %}girl{% endif %}">
+                            <td>{{ loop.index }}</td>
+                            <td>{{ tweet.text }}</td>
+                            <td>{{ tweet.created_at | datetimeformat }}</td>
+                            <td>{% if label == 0 %}M{% else %}F{% endif %}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

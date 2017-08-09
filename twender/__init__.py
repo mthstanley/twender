@@ -93,6 +93,32 @@ def register_blueprints(app):
     return None
 
 
+
+def register_template_filters(app):
+    """
+    param:
+        app: flask app
+    return:
+        None
+    description:
+        register jinja custom template filters
+    """
+    @app.template_filter('datetimeformat')
+    def datetimeformat(value, format='%H:%M / %d-%m-%Y'):
+        return value.strftime(format)
+
+
+    @app.template_filter('twitterthumb')
+    def twitterthumb(value, size="normal"):
+        if size in ['bigger', 'mini', 'original']:
+            if size == 'original':
+                value = value.replace('_normal', '')
+            else:
+                value = value.replace('_normal', '_' + size)
+        return value
+
+
+
 def create_app(config_name):
     """
     param:
@@ -109,6 +135,7 @@ def create_app(config_name):
     register_ext(app)
     register_cli(app)
     register_blueprints(app)
+    register_template_filters(app)
 
     # initialize tweepy api
     twitter_auth = tweepy.OAuthHandler(app.config['TWITTER_CONSUMER_KEY'],
