@@ -11,6 +11,10 @@ div.about-col p {
     text-align: justify;
 }
 
+.row.user {
+    margin-bottom: 25px;
+}
+
 .tweet {
     background-color: #eee;
 }

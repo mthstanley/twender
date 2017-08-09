@@ -104,7 +104,7 @@ def register_template_filters(app):
         register jinja custom template filters
     """
     @app.template_filter('datetimeformat')
-    def datetimeformat(value, format='%H:%M / %d-%m-%Y'):
+    def datetimeformat(value, format='%H:%m %b %d, %y'):
         return value.strftime(format)
 
 
