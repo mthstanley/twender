@@ -25,7 +25,7 @@ load_dotenv(dotenv_path)
 
 
 class Config:
-    SECRET_KEY = os.environ.get('SECRET_KEY') or 'hard to guess string'
+    SECRET_KEY = os.environ.get('SECRET_KEY')
 
     # Twitter configuration values
     TWITTER_CONSUMER_KEY = os.environ.get('TWITTER_CONSUMER_KEY')
@@ -48,20 +48,15 @@ class Config:
 
 class DevelopmentConfig(Config):
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DEV_DATABASE_URL') or \
-        'sqlite:///' + os.path.join(BASEDIR, 'data-dev.sqlite')
 
 
 class TestingConfig(Config):
     TESTING = True
     WTF_CSRF_ENABLED = False
-    SQLALCHEMY_DATABASE_URI = os.environ.get('TEST_DATABASE_URL') or \
-        'sqlite:///' + os.path.join(BASEDIR, 'data-test.sqlite')
 
 
 class ProductionConfig(Config):
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
-        'sqlite:///' + os.path.join(BASEDIR, 'data.sqlite')
+    DEBUG = False
 
 
 config = {
