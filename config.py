@@ -27,6 +27,9 @@ load_dotenv(dotenv_path)
 class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY')
 
+    # Collect static configuration
+    COLLECT_STATIC_ROOT = os.path.join(BASEDIR, 'static')
+
     # Twitter configuration values
     TWITTER_CONSUMER_KEY = os.environ.get('TWITTER_CONSUMER_KEY')
     TWITTER_CONSUMER_SECRET = os.environ.get('TWITTER_CONSUMER_SECRET')

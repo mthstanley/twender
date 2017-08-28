@@ -3,6 +3,7 @@ import sys
 from flask import Flask
 from flask_bootstrap import Bootstrap
 from flask_pymongo import PyMongo
+from flask_collect import Collect
 from werkzeug.utils import find_modules, import_string
 from config import config
 import tweepy
@@ -15,6 +16,7 @@ from utils.names import valid_names
 
 bootstrap = Bootstrap()
 mongo = PyMongo()
+collect = Collect()
 
 def register_ext(app):
     """
@@ -28,6 +30,7 @@ def register_ext(app):
     """
     bootstrap.init_app(app)
     mongo.init_app(app)
+    collect.init_app(app)
 
 
 def register_cli(app):

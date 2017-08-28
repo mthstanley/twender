@@ -4,3 +4,6 @@
 __pycache__
 
 venv/
+
+# collected static files for nginx
+/static/
