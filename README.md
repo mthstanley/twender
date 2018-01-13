@@ -3,10 +3,16 @@ Twender
 
 Description
 -----------
-Python project to determine the gender of Twitter users based on the text of
-their tweets using machine learning techniques. Provides tools for collecting
-tweets to be used as training data as well as building a naive bayes classifier
-trained on that data.
+Python project to determine the gender of Twitter users based on the text of their 
+tweets using machine learning techniques. Provides tools for collecting tweets to 
+be used as training data as well as building a naive bayes classifier trained on 
+that data. In order to provide the labeled training data used for supervised learning 
+(naive bayes) this project uses name and gender data from social security card 
+applications to create a mapping from first name to gender. It then uses that mapping to
+label a tweet as male or female based on the name they supplied to their twitter account.
+The Twender web application takes a twitter handle from the user and uses the internal
+classifier to classify each of their most recent tweets and then uses that to calculate 
+the overall gender of that user.
 
 You can find the application live at <http://twender.mtstanley.tech/>
 
