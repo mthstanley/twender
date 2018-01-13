@@ -8,6 +8,8 @@ their tweets using machine learning techniques. Provides tools for collecting
 tweets to be used as training data as well as building a naive bayes classifier
 trained on that data.
 
+You can find the application live at <http://twender.mtstanley.tech/>
+
 Setup
 -----
 Clone this repo using `git clone https://github.com/mthstanley/twender.git`
@@ -43,7 +45,7 @@ Build
 The classifier that Twender uses needs to be trained on some labeled tweet data, in 
 order to do this Twender first needs a list of valid names with a corresponding gender.
 To build this list use `flask mkvalidnames --save <src files>`, the data files used for doing 
-this can be found at `http://www.ssa.gov/oact/babynames/limits.html`. Once this is done you'll
+this can be found at <http://www.ssa.gov/oact/babynames/limits.html>. Once this is done you'll
 need to collect and label some tweets, to do so run `flask collecttweets --save`.
 
 Run
