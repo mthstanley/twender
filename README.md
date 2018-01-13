@@ -17,8 +17,7 @@ Then setup a new python virtual environment using `virtualenv -p python3 venv`
 afterwards run `source venv/bin/activate` next install required python packages 
 `pip install -r requirements.txt`. 
 
-Then create a .env file in the same directory as the config.py file with the following
-variables, similar to the following:
+Then create a .env file in the same directory as the config.py file, similar to the following:
 
 ```
 # .env configuration using environment variables
