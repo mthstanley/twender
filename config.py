@@ -37,12 +37,7 @@ class Config:
     TWITTER_ACCESS_TOKEN_SECRET = os.environ.get('TWITTER_ACCESS_TOKEN_SECRET')
 
     # Mongodb configuration
-    MONGO_HOST = os.environ.get('MONGO_HOST')
-    MONGO_PORT = os.environ.get('MONGO_PORT')
-    MONGO_USERNAME = os.environ.get('MONGO_USERNAME')
-    MONGO_PASSWORD = os.environ.get('MONGO_PASSWORD')
-    MONGO_AUTH_SOURCE = os.environ.get('MONGO_AUTH_SOURCE')
-
+    MONGO_URI = os.environ.get('MONGO_URI')
 
     @staticmethod
     def init_app(app):
