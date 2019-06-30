@@ -35,15 +35,11 @@ TWITTER_CONSUMER_SECRET=''
 TWITTER_ACCESS_TOKEN=''
 TWITTER_ACCESS_TOKEN_SECRET=''
 
-# mongodb access credentials
-MONGO_HOST='localhost'
-MONGO_PORT='27017'
-
-# required if using authentication with mongo
-MONGO_USERNAME='username'
-MONGO_PASSWORD='password'
-MONGO_AUTH_SOURCE='auth database name'
+# mongodb setup
+MONGO_URI='mongodb://[username:password@]host1[:port1][,...hostN[:portN]]][/[database][?options]]'
 ```
+
+NOTE: For the `MONGO_URI` format check out [their docs](https://docs.mongodb.com/manual/reference/connection-string/)
 
 Build
 -----
